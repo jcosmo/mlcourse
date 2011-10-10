@@ -3,8 +3,10 @@ package id.au.jwalker.mlcourse.linearregression2d.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.SpanElement;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -41,8 +43,16 @@ public class DataSetCanvas
     return status.getInnerText();
   }
 
-  public Button getButton()
+  @UiHandler( "button" )
+  void handleClick( final ClickEvent event )
   {
-    return button;
+    if ( getStatus().equals( "" ) )
+    {
+      updateStatus( "Click it again!" );
+    }
+    else
+    {
+      updateStatus( "" );
+    }
   }
 }

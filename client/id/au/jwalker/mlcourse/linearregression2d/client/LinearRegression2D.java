@@ -20,21 +20,6 @@ public class LinearRegression2D
   {
     final DataSetCanvas ui = new DataSetCanvas();
 
-    ui.getButton().addClickHandler( new ClickHandler()
-    {
-      public void onClick( ClickEvent event )
-      {
-        if ( ui.getStatus().equals( "" ) )
-        {
-          ui.updateStatus( "We now have some text" );
-        }
-        else
-        {
-          ui.updateStatus( "" );
-        }
-      }
-    } );
-
     RootPanel.get().add( ui.asWidget() );
   }
 }
