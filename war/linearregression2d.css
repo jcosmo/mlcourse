@@ -9,3 +9,35 @@ h1 {
 body, td, a, div, .p {
   font-family: arial, sans-serif
 }
+
+.menuPanel a {
+  display: block;
+  border-bottom: solid 1px #d3d3d3;
+  padding: 0.1em, 1em, 0.1em, 1em;
+  margin: 0.1em, 1em, 0.1em, 1em;
+  cursor: pointer;
+}
+
+.footer {
+  padding: 0.5em, 1em, 0.5em, 1em;
+  font-size: 0.8em;
+  border-top: solid 1px black;
+  background: #f5f5dc;
+  text-align: right;
+}
+
+.header {
+  border-bottom: solid 1px black;
+  background: #f5f5dc;
+  text-align: center;
+  font-size: 2em;
+}
+
+.menuPanel {
+  border-right: solid 1px black;
+  background: #f5f5dc;
+}
+
+.content {
+  background: #f5deb3;
+}

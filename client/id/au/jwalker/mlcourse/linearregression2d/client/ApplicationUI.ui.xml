@@ -1,17 +1,27 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
   <g:DockLayoutPanel unit="EM">
-    <g:north size="4">
-      <g:Label>Machine Learning</g:Label>
+    <g:north size="3">
+      <g:Label styleName="header">Machine Learning</g:Label>
     </g:north>
-    <g:west size="20">
-      <g:Label>Navigation</g:Label>
-    </g:west>
     <g:south size="2">
-      <g:Label>Footer</g:Label>
+      <g:Label styleName="footer">Footer</g:Label>
     </g:south>
+    <g:west size="10">
+      <g:FlowPanel styleName="menuPanel">
+        <g:Hyperlink ui:field="linearRegression2D">Linear Regression with 2 dimensions</g:Hyperlink>
+        <g:Hyperlink ui:field="linearRegression2D2">Linear Regression with 3 dimensions</g:Hyperlink>
+      </g:FlowPanel>
+    </g:west>
     <g:center>
-      <g:Label>Guff</g:Label>
+      <g:LayoutPanel ui:field="contentPanel">
+        <g:layer>
+          <g:Label styleName="content" ui:field="contentLabel">Guff</g:Label>
+        </g:layer>
+        <g:layer>
+          <g:Label styleName="content" ui:field="contentLabel2">Other guff</g:Label>
+        </g:layer>
+      </g:LayoutPanel>
     </g:center>
   </g:DockLayoutPanel>
 </ui:UiBinder>
