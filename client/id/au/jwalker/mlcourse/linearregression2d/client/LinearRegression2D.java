@@ -6,9 +6,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>
- */
 public class LinearRegression2D
   implements EntryPoint
 {
@@ -18,8 +15,9 @@ public class LinearRegression2D
    */
   public void onModuleLoad()
   {
-    final DataSetCanvas ui = new DataSetCanvas();
+    //final DataSetCanvas ui = new DataSetCanvas();
+    final ApplicationUI ui = new ApplicationUI();
 
-    RootPanel.get().add( ui.asWidget() );
+    RootLayoutPanel.get().add( ui.asWidget() );
   }
 }
