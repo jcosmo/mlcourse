@@ -118,7 +118,11 @@ module Buildr::IntellijIdea
 
         xml.RunnerSettings(:RunnerId => "Run")
         xml.ConfigurationWrapper(:RunnerId => "Run")
-        xml.method()
+        xml.method do
+          xml.option(:name => "BuildArtifacts", :enabled => 'true') do
+            xml.artifact( :name => project.iml.id )
+          end
+        end
       end
     end
 
