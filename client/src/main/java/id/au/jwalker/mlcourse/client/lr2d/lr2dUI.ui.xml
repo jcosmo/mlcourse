@@ -1,0 +1,11 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  <g:DockLayoutPanel unit="EM">
+    <g:north size="3">
+      <g:Label styleName="innerHeader">Linear Regression in 2 Dimensions</g:Label>
+    </g:north>
+    <g:center>
+      <g:Label>Better put some guff here</g:Label>
+    </g:center>
+  </g:DockLayoutPanel>
+</ui:UiBinder>

@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
+import id.au.jwalker.mlcourse.client.lr2d.lr2dUI;
 
 public class ApplicationUI
 {
@@ -28,18 +29,18 @@ public class ApplicationUI
   @UiField
   Hyperlink linearRegression2D;
   @UiField
-  Label contentLabel;
-  @UiField
   Hyperlink linearRegression2D2;
   @UiField
   Label contentLabel2;
   @UiField
   LayoutPanel contentPanel;
+  @UiField
+  lr2dUI lr2d;
 
   public ApplicationUI()
   {
     _widget = binder.createAndBindUi( this );
-    contentPanel.setWidgetLeftWidth( contentLabel, 0, Unit.PX, 0, Unit.PX );
+    contentPanel.setWidgetLeftWidth( lr2d, 0, Unit.PX, 0, Unit.PX );
     contentPanel.setWidgetLeftWidth( contentLabel2, 0, Unit.PX, 0, Unit.PX );
     contentPanel.forceLayout();
   }
@@ -52,7 +53,7 @@ public class ApplicationUI
   @UiHandler( "linearRegression2D" )
   void showLinearRegression2D( final ClickEvent e )
   {
-    show( contentLabel );
+    show( lr2d );
   }
 
   @UiHandler( "linearRegression2D2" )
@@ -76,24 +77,15 @@ public class ApplicationUI
     {
       _current = widget;
       contentPanel.setWidgetLeftWidth( _current, 0, Unit.PX, 100, Unit.PCT );
-      contentPanel.animate( 1000 );
+      contentPanel.animate( 250 );
     }
   }
 
   private void hideThenShow( final Widget toHide, final Widget toShow )
   {
     contentPanel.setWidgetLeftWidth( toHide, 0, Unit.PX, 0, Unit.PX );
-    contentPanel.animate( 1000, new AnimationCallback()
-    {
-      public void onAnimationComplete()
-      {
-        _current = null;
-        show( toShow );
-      }
-
-      public void onLayout( final Layer layer, final double progress )
-      {
-      }
-    } );
+    contentPanel.forceLayout( );
+    _current = null;
+    show( toShow );
   }
 }

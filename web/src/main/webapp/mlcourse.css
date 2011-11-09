@@ -41,3 +41,11 @@ body, td, a, div, .p {
 .content {
   background: #f5deb3;
 }
+
+.innerHeader {
+  border-bottom: solid 1px lightgray;
+  background: #f5f5fc;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.5em;
+}
