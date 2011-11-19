@@ -26,23 +26,59 @@ public class lr2dUI
   Button startButton;
   @UiField
   Canvas canvas;
-  Context2d context;
-  CssColor redrawColor;
+
+  private Context2d backBufferContext;
+  private Context2d context;
+  private CssColor white;
+  private CssColor black;
+
+  static final int WIDTH = 400;
+  static final int HEIGHT = 400;
+
+  int posn = 1;
 
   public lr2dUI()
   {
     initWidget( ourUiBinder.createAndBindUi( this ) );
-    canvas.setWidth( "100%" );
-    canvas.setHeight( "100%" );
+    final Canvas backBuffer = Canvas.createIfSupported();
+
+    canvas.setWidth( (WIDTH) + "px" );
+    canvas.setHeight( (HEIGHT) + "px" );
+    canvas.setCoordinateSpaceWidth( WIDTH );
+    canvas.setCoordinateSpaceHeight( HEIGHT );
+    backBuffer.setCoordinateSpaceWidth( WIDTH );
+    backBuffer.setCoordinateSpaceHeight( HEIGHT );
+
     context = canvas.getContext2d();
-    redrawColor = CssColor.make("rgba(200,0,100,0.6)");
+    backBufferContext = backBuffer.getContext2d();
+
+    white = CssColor.make("rgba(255,255,255,1)");
+    black = CssColor.make("rgba(255,0,0,1)");
   }
 
   @UiHandler( "startButton" )
   void startCanvas( final ClickEvent e )
   {
-    context.setFillStyle( redrawColor );
-    context.fillRect( 0, 0, 100, 100);
+    drawAxis();
+    context.drawImage( backBufferContext.getCanvas(), 0, 0 );
+  }
+
+  void drawAxis( )
+  {
+    backBufferContext.setFillStyle( white );
+    backBufferContext.fillRect( 0, 0, WIDTH, HEIGHT );
+    backBufferContext.setLineWidth( 1 );
+    backBufferContext.setStrokeStyle( black );
+    backBufferContext.beginPath();
+    backBufferContext.moveTo( WIDTH / 2, 0 );
+    backBufferContext.lineTo( WIDTH / 2, HEIGHT );
+    backBufferContext.closePath();
+    backBufferContext.stroke();
+    backBufferContext.beginPath();
+    backBufferContext.moveTo( 0, HEIGHT / 2 );
+    backBufferContext.lineTo( WIDTH, HEIGHT / 2 );
+    backBufferContext.closePath();
+    backBufferContext.stroke();
   }
 
   @UiFactory
