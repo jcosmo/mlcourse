@@ -6,10 +6,10 @@
       <g:Label styleName="innerHeader">Linear Regression in 2 Dimensions</g:Label>
     </g:north>
     <g:center>
-      <c:Canvas ui:field="canvas"/>
+      <c:Canvas ui:field="_canvas"/>
     </g:center>
     <g:south size="3">
-      <g:Button ui:field="startButton">Start</g:Button>
+      <g:Button ui:field="_startButton">Start</g:Button>
     </g:south>
   </g:DockLayoutPanel>
 </ui:UiBinder>
