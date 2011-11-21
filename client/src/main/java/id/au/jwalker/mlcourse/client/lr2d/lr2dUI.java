@@ -3,17 +3,23 @@ package id.au.jwalker.mlcourse.client.lr2d;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.CssColor;
+import com.google.gwt.cell.client.AbstractCell;
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.text.shared.SimpleSafeHtmlRenderer;
 import com.google.gwt.touch.client.Point;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
-import java.util.ArrayList;
+import com.google.gwt.view.client.ListDataProvider;
+import java.util.List;
 
 public class lr2dUI
   extends Composite
@@ -34,19 +40,37 @@ public class lr2dUI
   Button _startButton;
   @UiField
   Canvas _canvas;
+  @UiField
+  CellList<Point> _dataTable;
+
   @UiFactory
   Canvas constructCanvas()
   {
     return Canvas.createIfSupported();
   }
 
+  @UiFactory
+  CellList<Point> constructCellList()
+  {
+    Cell<Point> renderer = new AbstractCell<Point>()
+    {
+      @Override
+      public void render( final Context context, final Point point, final SafeHtmlBuilder sb )
+      {
+        if ( point != null) {
+          sb.append( SimpleSafeHtmlRenderer.getInstance().render( point.toString() ) );
+        }
+      }
+    };
+    return new CellList<Point>( renderer );
+  }
+
   private final Context2d _backBufferContext;
   private final Context2d _context;
-  private final ArrayList<Point> _dataPoints;
+  private final List<Point> _dataPoints;
 
   public lr2dUI()
   {
-    _dataPoints = new ArrayList<Point>();
     initWidget( _ourUiBinder.createAndBindUi( this ) );
     final Canvas backBuffer = Canvas.createIfSupported();
 
@@ -63,6 +87,22 @@ public class lr2dUI
     WHITE = CssColor.make("rgba(255,255,255,1)");
     BLACK = CssColor.make("rgba(0,0,0,1)");
     RED = CssColor.make("rgb(255,0,0)");
+
+    ListDataProvider<Point> dataTableProvider = new ListDataProvider<Point>();
+    dataTableProvider.addDataDisplay( _dataTable );
+    _dataPoints = dataTableProvider.getList();
+
+    fillWithDummyData();
+
+    redraw();
+  }
+
+  private void fillWithDummyData()
+  {
+    for (int i = 0; i < 50; i++)
+    {
+      addPoint( i * 10 % WIDTH, i * 15 % HEIGHT );
+    }
   }
 
   @UiHandler( "_startButton" )
@@ -114,9 +154,15 @@ public class lr2dUI
   @UiHandler( "_canvas" )
   public void clicked( final ClickEvent clickEvent )
   {
-    final Point point = new Point( clickEvent.getX(), clickEvent.getY() );
-    _dataPoints.add( point );
+    final Point point = addPoint( clickEvent.getX(), clickEvent.getY() );
     drawPoint( point );
     _context.drawImage( _backBufferContext.getCanvas(), 0, 0 );
+  }
+
+  private Point addPoint( final int x, final int y )
+  {
+    final Point point = new Point( x, y );
+    _dataPoints.add( point );
+    return point;
   }
 }
