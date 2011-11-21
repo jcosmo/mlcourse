@@ -40,7 +40,7 @@ public class ApplicationUI
   public ApplicationUI()
   {
     _widget = binder.createAndBindUi( this );
-    contentPanel.setWidgetLeftWidth( lr2d, 0, Unit.PX, 0, Unit.PX );
+    contentPanel.setWidgetLeftWidth( lr2d, 0, Unit.PX, 100, Unit.PCT );
     contentPanel.setWidgetLeftWidth( contentLabel2, 0, Unit.PX, 0, Unit.PX );
     contentPanel.forceLayout();
   }
